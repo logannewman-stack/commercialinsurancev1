@@ -8,7 +8,7 @@ import {
 import BusinessSearch from "../components/BusinessSearch.jsx";
 import ProductWindow from "../components/ProductWindow.jsx";
 import Showcase from "../components/Showcase.jsx";
-import { Counter, Marquee, Reveal, ScrollLit, Spotlight, Words } from "../components/fx.jsx";
+import { Counter, Reveal, ScrollLit, Spotlight, Words } from "../components/fx.jsx";
 import { BUSINESS_TYPES, CLASS } from "../data/industries.js";
 import { EXPLORER, LINE, recommend } from "../data/coverage.js";
 import { PAGE_FOR_CLASS } from "../data/industryPages.js";
@@ -24,8 +24,6 @@ const INDUSTRY_CARDS = [
   ["cleaning", SprayCan], ["autoservice", Car], ["realestate", Building2], ["transport", Truck],
 ];
 const STEP_NAMES = { industry: "business type", zip: "location", space: "your space", revenue: "revenue", team: "team size", history: "history", coverage: "coverage", contact: "your details" };
-const MARQUEE_A = ["Restaurants", "Electricians", "Dentists", "Food trucks", "Hair salons", "Plumbers", "Consultants", "Gyms", "Landlords", "Bakeries", "Roofers", "Law firms"];
-const MARQUEE_B = ["General liability", "Business owner’s policy", "Workers’ comp", "Commercial auto", "Cyber", "Professional liability", "Umbrella", "Commercial property", "Liquor liability", "Tools and equipment"];
 
 function useStart() {
   const { setA } = useQuote();
@@ -57,15 +55,6 @@ function Hero() {
         </Reveal>
       </div>
       <Reveal delay={0.4} y={60} blur={0} className="wrap"><ProductWindow /></Reveal>
-    </section>
-  );
-}
-
-function Strip() {
-  return (
-    <section className="strip" aria-label="Businesses and coverage Keel compares">
-      <Marquee items={MARQUEE_A} />
-      <Marquee items={MARQUEE_B} reverse />
     </section>
   );
 }
@@ -323,7 +312,6 @@ export default function Home() {
   return (
     <main>
       <Hero />
-      <Strip />
       <Showcase />
       <Manifesto />
       <Bento />

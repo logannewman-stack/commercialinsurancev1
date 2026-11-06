@@ -112,17 +112,6 @@ export function Spotlight({ as: Tag = "div", className = "", children, ...rest }
   return <Tag className={`spot ${className}`} onMouseMove={onMove} {...rest}>{children}</Tag>;
 }
 
-/* An endless, edge-faded strip of words. Decorative. */
-export function Marquee({ items, reverse = false }) {
-  return (
-    <div className="marquee" aria-hidden="true">
-      <div className={`marquee-track${reverse ? " reverse" : ""}`}>
-        {[...items, ...items].map((t, i) => <span key={i} className="mq-item">{t}<i className="mq-dot" /></span>)}
-      </div>
-    </div>
-  );
-}
-
 /* True when the viewport matches a media query. */
 export function useMedia(query) {
   const get = () => typeof window !== "undefined" && window.matchMedia?.(query).matches;

@@ -51,7 +51,7 @@ html { overflow-x: clip; }
 @keyframes drift-b { to { transform: translate3d(-6%, 8%, 0) scale(0.92); } }
 
 /* hero */
-.hero2 { position: relative; overflow: hidden; padding-top: clamp(24px, 5vw, 72px); }
+.hero2 { position: relative; overflow-x: clip; overflow-y: visible; padding-top: clamp(24px, 5vw, 72px); }
 .hero2-inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 26px; }
 .hero2-lede { max-width: 38em; margin: 0 auto; }
 .hero2-search { width: 100%; max-width: 640px; text-align: left; }
@@ -107,17 +107,6 @@ html { overflow-x: clip; }
   .pw-bar .tag { display: none; }
   .pw { border-radius: 22px; }
 }
-
-/* marquee strip */
-.strip { padding-block: clamp(22px, 3vw, 34px); border-block: 1px solid var(--line); display: grid; gap: 12px; overflow: hidden; }
-.marquee { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
-.marquee-track { display: flex; width: max-content; animation: marquee 52s linear infinite; }
-.marquee-track.reverse { animation-direction: reverse; animation-duration: 64s; }
-.marquee:hover .marquee-track { animation-play-state: paused; }
-.mq-item { display: inline-flex; align-items: center; gap: 30px; padding-right: 30px; font-family: var(--font-display); font-stretch: 112%; font-weight: 620; font-size: clamp(1.35rem, 1rem + 1.3vw, 2.1rem); letter-spacing: -0.035em; white-space: nowrap; }
-.marquee + .marquee .mq-item { font-size: clamp(1rem, 0.9rem + 0.5vw, 1.3rem); font-weight: 520; color: var(--muted); letter-spacing: -0.015em; }
-.mq-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex: none; }
-@keyframes marquee { to { transform: translateX(-50%); } }
 
 /* pinned showcase */
 .show { padding-block: clamp(88px, 11vw, 160px); }
@@ -347,6 +336,6 @@ html { overflow-x: clip; }
 @keyframes sweep { to { --ang: 360deg; } }
 
 @media (prefers-reduced-motion: reduce) {
-  .marquee-track, .aurora i, .pe-dot::after, .b-est-track i, .qcard.is-best::before { animation: none !important; }
+  .aurora i, .pe-dot::after, .b-est-track i, .qcard.is-best::before { animation: none !important; }
   .show-step.dim { filter: none; }
 }
