@@ -33,6 +33,13 @@ function text(lead) {
     lines.push("", "Top quotes shown:");
     for (const q of lead.quotes) lines.push(`  ${q.carrier}: $${q.monthly}/mo ($${q.annual}/yr)`);
   }
+  if (lead.documents) {
+    const d = lead.documents;
+    lines.push("", `Started from uploaded documents: ${(d.kinds || []).join(", ") || "yes"}`);
+    if (d.carrier) lines.push(`Current carrier: ${d.carrier}`);
+    if (d.renews) lines.push(`Renews: ${d.renews}`);
+    if (d.currentPremium) lines.push(`Current premium: $${d.currentPremium}/yr`);
+  }
   if (lead.demo) lines.push("", "Note: these were sample prices from the demo pricing engine.");
   if (lead.carrier) {
     lines.push("", `Carrier: ${lead.carrier}`, `Plan: ${lead.plan}`, `Start date: ${lead.startDate}`);

@@ -7,6 +7,7 @@ export const DEFAULT_ANSWERS = {
   industry: null, businessType: "", zip: "", space: null, sqft: 2500, revenue: 500000,
   employees: null, years: null, claims: null, lines: [], recFor: null, vehicles: 2,
   name: "", business: "", email: "", phone: "", timing: null, seen: [],
+  docs: null, fromDocs: false,
 };
 export const DEFAULT_OPTIONS = { limit: "1/2", deductible: 1000, pay: "monthly", sort: "value" };
 

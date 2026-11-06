@@ -18,6 +18,7 @@ export async function submitLead(stage, a, extra = {}) {
       revenue: a.revenue, employees: a.employees, years: a.years, claims: a.claims, vehicles: a.vehicles,
       coverage: a.lines.map((l) => LINE[l]?.name || l), timing: a.timing,
     },
+    documents: a.docs ? { kinds: a.docs.kinds, carrier: a.docs.carrier, renews: a.docs.expiration, currentPremium: a.docs.premium } : null,
     ...extra,
     demo: DEMO_QUOTES,
     page: typeof window !== "undefined" ? window.location.href : "",

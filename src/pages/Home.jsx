@@ -48,6 +48,9 @@ function Hero() {
           <BusinessSearch label="What kind of business do you run?" placeholder="Try café, plumber or dentist"
             onPick={(b) => start({ industry: b.cls, businessType: b.label, ...(b.space ? { space: b.space } : {}) })} />
         </Reveal>
+        <Reveal delay={0.66}>
+          <Link to="/quote/upload" className="hero-upload"><span className="hu-icon" aria-hidden="true">↑</span> Already insured? <b>Upload your certificate or ACORD</b> and skip the questions <ArrowRight size={15} aria-hidden="true" /></Link>
+        </Reveal>
         <Reveal delay={0.72}>
           <ul className="hero-facts center">
             <li><Check size={15} aria-hidden="true" /> About 3 minutes</li>

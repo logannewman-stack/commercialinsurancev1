@@ -44,6 +44,21 @@ Every quote request, callback request and policy request is sent to `POST /api/l
 
 `docs/google-sheets-leads.gs` turns a Google Sheet into a lead log, with one row per lead. Setup steps are at the top of the file and take about two minutes. Paste the web app URL it gives you into `LEAD_WEBHOOK_URL`.
 
+## Document upload (fast quotes for insured businesses)
+
+Businesses that already have insurance can start at `/quote/upload` and drag in, browse to, paste, or photograph their certificate of insurance (ACORD 25), ACORD applications, declarations pages or loss runs. `api/documents.js` reads them with Claude and prefills the quote. The customer checks the results at `/quote/review`, and is asked only the questions the documents didn't answer.
+
+| Variable | What it does |
+| --- | --- |
+| `ANTHROPIC_API_KEY` | Turns on automatic reading (create a key at https://console.anthropic.com). Without it, uploads still work: the files are emailed to you and the customer is told an advisor will follow up. |
+| `ANTHROPIC_MODEL` | Optional. Defaults to `claude-opus-5-5`. |
+
+Notes:
+- With `RESEND_API_KEY` and `LEAD_NOTIFY_EMAIL` set, every upload is emailed to you with the files attached and what was read from them.
+- Photos are compressed in the browser, and the total upload is capped at about 3 MB, because Vercel limits a function request to 4.5 MB. For larger files, add Vercel Blob storage later.
+- Document contents are never written to logs. Only file names, types and sizes are.
+- The request uses Claude's server-side safety fallback (`fallbacks: "default"`), so if a request is ever declined by a safety check, it's retried on another model automatically.
+
 ## Analytics
 
 Page views are tracked with Vercel Web Analytics, which doesn't use cookies. Turn it on in **Vercel → Project → Analytics → Enable**. Nothing else is needed. Until you turn it on, the browser console shows a harmless 404 for `/_vercel/insights/script.js`.

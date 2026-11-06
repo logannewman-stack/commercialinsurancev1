@@ -262,7 +262,7 @@ function ContactStep({ a, setA, clearError }) {
 const STEP_VIEWS = { industry: IndustryStep, zip: ZipStep, space: SpaceStep, revenue: RevenueStep, team: TeamStep, history: HistoryStep, coverage: CoverageStep, contact: ContactStep };
 
 /* ---------- summary ---------- */
-function rows(a, current) {
+export function answerRows(a, current) {
   const seen = (id) => a.seen.includes(id) || current === id;
   const st = zipState(a.zip);
   const lines = a.lines.map((l) => LINE[l]?.abbr || LINE[l]?.short).filter(Boolean);
@@ -291,8 +291,9 @@ function Summary({ a, o, current, onEdit }) {
       ) : (
         <p className="est-empty">Choose your type of business to see a price range.</p>
       )}
+      {a.fromDocs && <p className="from-docs"><span className="pe-dot" /> Filled in from your documents</p>}
       <ul className="answers">
-        {rows(a, current).map(([id, label, value]) => (
+        {answerRows(a, current).map(([id, label, value]) => (
           <li key={id} className={value ? "" : "empty"}>
             <span className="ans-label">{label}</span>
             <span className="ans-value">{value || "—"}</span>
@@ -356,8 +357,13 @@ export default function Quote() {
       return;
     }
     markSeen(st.id);
-    if (idx === STEPS.length - 1) finish();
-    else navigate(`/quote/${STEPS[idx + 1].id}`);
+    if (idx === STEPS.length - 1) { finish(); return; }
+    // When documents filled most of the form, jump to the next question that still needs an answer.
+    const cur = aRef.current;
+    const nextStep = cur.fromDocs
+      ? STEPS.slice(idx + 1).find((s) => s.id === "contact" || !cur.seen.includes(s.id) || s.validate(cur))
+      : STEPS[idx + 1];
+    navigate(`/quote/${nextStep.id}`);
   }, [st, idx, markSeen, finish, navigate]);
 
   const advance = useCallback((patch) => {
@@ -379,7 +385,10 @@ export default function Quote() {
     return () => window.removeEventListener("keydown", k);
   }, [goNext]);
 
-  if (!st) return <Navigate to={`/quote/${savedStep && STEPS.some((s) => s.id === savedStep) ? savedStep : "industry"}`} replace />;
+  if (!st) {
+    if (!param && !a.industry) return <Navigate to="/quote/start" replace />;
+    return <Navigate to={`/quote/${savedStep && STEPS.some((s) => s.id === savedStep) ? savedStep : "industry"}`} replace />;
+  }
 
   const View = STEP_VIEWS[st.id];
   const inSection = STEPS.filter((s) => s.section === st.section);

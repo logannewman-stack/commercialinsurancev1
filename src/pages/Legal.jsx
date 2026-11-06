@@ -32,6 +32,7 @@ export function Privacy() {
       <h2>What we collect</h2>
       <ul>
         <li><b>What you tell us about your business:</b> type of business, location, building size, revenue, number of employees, business history and the coverage you want.</li>
+        <li><b>Insurance documents you upload:</b> certificates of insurance, ACORD applications, declarations pages or loss runs.</li>
         <li><b>Contact details:</b> your name, business name, email address, phone number and business address.</li>
         <li><b>Your choices:</b> the quotes you view, the policy you request, your start date and payment plan.</li>
         <li><b>Technical data:</b> our hosting provider records basic request data such as IP address, browser type and pages visited. If site analytics are turned on, they count page views without using cookies.</li>
@@ -39,6 +40,7 @@ export function Privacy() {
       <h2>How we use it</h2>
       <ul>
         <li>To prepare quotes and show you prices from insurance carriers.</li>
+        <li>To read documents you upload and fill in your quote automatically, using an AI service provider that processes them on our behalf.</li>
         <li>To contact you about quotes or policies you ask about, or when you ask for a call.</li>
         <li>To finalize and service policies you choose to buy.</li>
         <li>To run, secure and improve this website, and to meet legal and regulatory duties.</li>
@@ -46,7 +48,7 @@ export function Privacy() {
       <h2>Who we share it with</h2>
       <ul>
         <li><b>Insurance carriers</b> that can quote your business, and the carrier you choose.</li>
-        <li><b>Service providers</b> that host this site and deliver email for us. They may use your information only to provide those services.</li>
+        <li><b>Service providers</b> that host this site, read uploaded documents and deliver email for us. They may use your information only to provide those services.</li>
         <li><b>Authorities</b> when the law requires it.</li>
       </ul>
       <p>We don’t sell your personal information.</p>

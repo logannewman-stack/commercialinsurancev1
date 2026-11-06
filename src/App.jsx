@@ -5,6 +5,9 @@ import Footer from "./components/Footer.jsx";
 import ScrollToTop from "./components/ScrollToTop.jsx";
 import Home from "./pages/Home.jsx";
 import Quote from "./pages/Quote.jsx";
+import QuoteStart from "./pages/QuoteStart.jsx";
+import QuoteUpload from "./pages/QuoteUpload.jsx";
+import QuoteReview from "./pages/QuoteReview.jsx";
 import Results from "./pages/Results.jsx";
 import Checkout from "./pages/Checkout.jsx";
 import Confirmation from "./pages/Confirmation.jsx";
@@ -27,6 +30,9 @@ function Shell() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/quote" element={<Quote />} />
+        <Route path="/quote/start" element={<QuoteStart />} />
+        <Route path="/quote/upload" element={<QuoteUpload />} />
+        <Route path="/quote/review" element={<QuoteReview />} />
         <Route path="/quote/:step" element={<Quote />} />
         <Route path="/quotes" element={<Results />} />
         <Route path="/checkout/:id" element={<Checkout />} />
