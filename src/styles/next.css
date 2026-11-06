@@ -38,6 +38,7 @@ html { overflow-x: clip; }
 @keyframes ring { from { transform: scale(1); opacity: 0.6; } to { transform: scale(2.6); opacity: 0; } }
 
 /* aurora glow */
+.aurora-clip { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
 .aurora { position: absolute; inset: -15% -10% auto; height: 110%; pointer-events: none; z-index: 0; filter: blur(70px); }
 .aurora i { position: absolute; display: block; border-radius: 50%; width: min(46vw, 720px); aspect-ratio: 1; }
 .aurora i:nth-child(1) { left: 6%; top: 4%; background: radial-gradient(circle, color-mix(in srgb, var(--accent) 34%, transparent), transparent 66%); animation: drift-a 22s ease-in-out infinite alternate; }
@@ -53,7 +54,8 @@ html { overflow-x: clip; }
 .hero2 { position: relative; overflow-x: clip; overflow-y: visible; padding-top: clamp(24px, 5vw, 72px); }
 .hero2-inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 26px; }
 .hero2-lede { max-width: 38em; margin: 0 auto; }
-.hero2-search { width: 100%; max-width: 640px; text-align: left; }
+/* the search sits above the lines after it, so its dropdown is never drawn under them */
+.hero2-search { position: relative; z-index: 20; width: 100%; max-width: 640px; text-align: left; }
 .hero2-search .bsearch { max-width: none; }
 .hero2-search .bsearch-label { text-align: center; }
 .hero-facts.center { justify-content: center; }
@@ -219,7 +221,7 @@ html { overflow-x: clip; }
 .ind-grid .ind-card { flex: 1; border-radius: 22px; }
 
 /* closing band */
-.cta2 { position: relative; overflow: hidden; background: var(--band); color: var(--band-fg); padding-block: clamp(100px, 12vw, 180px); text-align: center; }
+.cta2 { position: relative; z-index: 2; background: var(--band); color: var(--band-fg); padding-block: clamp(100px, 12vw, 180px); text-align: center; }
 .cta2-inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 26px; }
 .cta2 .mega { max-width: 14ch; }
 .cta2-note { font-family: var(--font-mono); font-size: 0.78rem; color: color-mix(in srgb, var(--band-fg) 55%, transparent); }

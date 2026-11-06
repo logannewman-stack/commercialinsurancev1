@@ -215,7 +215,7 @@ function Cta() {
   const start = useStart();
   return (
     <section className="cta2" aria-labelledby="cta-title">
-      <div className="aurora dark" aria-hidden="true"><i /><i /><i /></div>
+      <div className="aurora-clip" aria-hidden="true"><div className="aurora dark"><i /><i /><i /></div></div>
       <div className="wrap cta2-inner">
         <Reveal><p className="eyebrow on-dark">Ready when you are</p></Reveal>
         <Words as="h2" id="cta-title" className="mega on-dark" text="See what your business should be paying." />
