@@ -25,19 +25,23 @@ export function Reveal({ children, delay = 0, y = 26, blur = 8, className = "", 
   );
 }
 
-/* A headline that assembles word by word. `mark` underlines one word in the accent color. */
-export function Words({ text, as: Tag = "h1", className = "", delay = 0, stagger = 0.075, mark = -1, id }) {
+/*
+  A headline that assembles word by word. `mark` underlines one word in the accent color.
+  `tail` adds a second, quieter sentence in the muted tone (a two-tone headline).
+*/
+export function Words({ text, tail = "", as: Tag = "h1", className = "", delay = 0, stagger = 0.075, mark = -1, id }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "0px 0px -6% 0px" });
   const reduce = useReducedMotion();
-  const words = text.split(" ");
+  const lead = text.split(" ");
+  const words = tail ? [...lead, ...tail.split(" ")] : lead;
   const on = reduce || inView;
   return (
     <Tag ref={ref} className={className} id={id}>
       {words.map((w, i) => (
         <Fragment key={`${w}-${i}`}>
           <motion.span
-            className={`word${i === mark ? " word-mark" : ""}`}
+            className={`word${i === mark ? " word-mark" : ""}${i >= lead.length ? " tone" : ""}`}
             initial={reduce ? false : { opacity: 0, y: "0.42em", filter: "blur(12px)" }}
             animate={on ? { opacity: 1, y: "0em", filter: "blur(0px)" } : undefined}
             transition={{ duration: 1.1, delay: delay + i * stagger, ease: [0.19, 1, 0.22, 1] }}

@@ -2,12 +2,14 @@ import { useMemo, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AnimatePresence, motion, useInView, useReducedMotion } from "framer-motion";
 import {
-  ArrowRight, BadgeCheck, Briefcase, Building2, Car, Check, Columns3, Dumbbell, FileCheck2, HardHat, Laptop, Lock, MessageCircle,
-  Minus, Scissors, SprayCan, Stethoscope, Store, Truck, Utensils, X,
+  ArrowRight, Briefcase, Building2, Car, Check, Dumbbell, HardHat, Laptop, Minus, Scissors, SprayCan, Stethoscope, Store, Truck, Utensils, X,
 } from "lucide-react";
 import BusinessSearch from "../components/BusinessSearch.jsx";
 import ProductWindow from "../components/ProductWindow.jsx";
-import Showcase from "../components/Showcase.jsx";
+import Tour from "../components/Tour.jsx";
+import Features from "../components/Features.jsx";
+import PhoneRow from "../components/PhoneRow.jsx";
+import { SAMPLE } from "../data/sample.js";
 import { Counter, Reveal, ScrollLit, Spotlight, Words } from "../components/fx.jsx";
 import { BUSINESS_TYPES, CLASS } from "../data/industries.js";
 import { EXPLORER, LINE, recommend } from "../data/coverage.js";
@@ -58,8 +60,6 @@ function Hero() {
     </section>
   );
 }
-
-const SAMPLE = { industry: "restaurant", businessType: "Café or coffee shop", zip: "78704", space: "lease", sqft: 2400, revenue: 850000, employees: "6-10", years: "3-10", claims: "0", lines: ["bop", "wc", "liquor"], vehicles: 2 };
 
 function SpreadChart() {
   const ref = useRef(null);
@@ -112,82 +112,13 @@ function Manifesto() {
   );
 }
 
-function Bento() {
-  const [i, setI] = useState(0);
-  const ranges = [["$617", "$783"], ["$598", "$741"], ["$632", "$770"]];
-  return (
-    <section className="block" id="why" aria-labelledby="why-title">
-      <div className="wrap">
-        <div className="block-head">
-          <div><Reveal><p className="eyebrow">Why Keel</p></Reveal><Words as="h2" id="why-title" className="mega-2" text="Built for owners, not call centers." /></div>
-          <Reveal delay={0.15}><p className="lede">Everything you need to buy business insurance with confidence, in one place.</p></Reveal>
-        </div>
-        <div className="bento">
-          <Reveal className="b-a"><Spotlight className="bento-card tall" onMouseEnter={() => setI((v) => (v + 1) % ranges.length)}>
-            <p className="b-k">Live estimate</p>
-            <h3>See a price before you finish.</h3>
-            <p className="b-d">Your range updates with every answer, so there are no surprises on the last screen.</p>
-            <div className="b-est">
-              <AnimatePresence mode="wait">
-                <motion.p key={i} className="b-est-val" initial={{ opacity: 0, y: 8, filter: "blur(6px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} exit={{ opacity: 0, y: -8, filter: "blur(6px)" }} transition={{ duration: 0.35 }}>
-                  {ranges[i][0]}<span>–</span>{ranges[i][1]}<small>/mo</small>
-                </motion.p>
-              </AnimatePresence>
-              <div className="b-est-track"><i /></div>
-              <ul className="b-est-rows"><li><span>Business</span><b>Dentist</b></li><li><span>Team</span><b>6–10 people</b></li><li><span>Coverage</span><b>E&amp;O, GL, WC</b></li></ul>
-            </div>
-          </Spotlight></Reveal>
-          <Reveal className="b-b" delay={0.08}><Spotlight className="bento-card">
-            <p className="b-k"><BadgeCheck size={15} aria-hidden="true" /> Ranked by value</p>
-            <h3>Not by who pays us most.</h3>
-            <p className="b-d">Quotes are ranked by price and each carrier’s financial strength rating.</p>
-            <ul className="b-rank"><li className="on"><span>Everstone</span><em>Best value</em><b>$412</b></li><li><span>Bellmoor</span><b>$436</b></li><li><span>Ashgrove</span><b>$447</b></li></ul>
-          </Spotlight></Reveal>
-          <Reveal className="b-c" delay={0.1}><Spotlight className="bento-card">
-            <p className="b-k"><Columns3 size={15} aria-hidden="true" /> Compare</p>
-            <h3>Side by side, line by line.</h3>
-            <div className="b-cmp"><div><span /><b>Halden</b><b>Lanternbay</b></div><div><span>Monthly</span><b className="win">$617</b><b>$622</b></div><div><span>Fee</span><b>$6</b><b>$3</b></div><div><span>Rating</span><b>A-</b><b>A-</b></div></div>
-          </Spotlight></Reveal>
-          <Reveal className="b-d2" delay={0.14}><Spotlight className="bento-card">
-            <p className="b-k"><FileCheck2 size={15} aria-hidden="true" /> Certificates</p>
-            <h3>Proof of insurance, fast.</h3>
-            <p className="b-d">Your certificate of insurance is emailed as soon as your policy is issued.</p>
-            <div className="b-doc"><span className="b-doc-lines"><i /><i /><i /></span><span className="b-stamp"><Check size={14} aria-hidden="true" /></span></div>
-          </Spotlight></Reveal>
-          <Reveal className="b-e" delay={0.18}><Spotlight className="bento-card">
-            <p className="b-k"><MessageCircle size={15} aria-hidden="true" /> Advisors</p>
-            <h3>A licensed human, when you want one.</h3>
-            <div className="b-chat"><p className="me">Do I need hired auto if my crew drives their own trucks?</p><p className="them">Usually, yes. I’ll add it and send updated quotes.</p></div>
-          </Spotlight></Reveal>
-          <Reveal className="b-f" delay={0.1}><Spotlight className="bento-card wide">
-            <div>
-              <p className="b-k">How we get paid</p>
-              <h3>Same price as going direct.</h3>
-              <p className="b-d">Carriers pay Keel a commission when you buy. You never pay a fee to compare or to talk to an advisor.</p>
-            </div>
-            <p className="b-zero"><Counter to={0} prefix="$" /><small>to compare</small></p>
-          </Spotlight></Reveal>
-          <Reveal className="b-g" delay={0.14}><Spotlight className="bento-card wide">
-            <div>
-              <p className="b-k"><Lock size={15} aria-hidden="true" /> Privacy</p>
-              <h3>Your details stay yours.</h3>
-              <p className="b-d">We share your application only with carriers that can quote you. We don’t sell your information.</p>
-            </div>
-            <span className="b-lock" aria-hidden="true"><Lock size={34} strokeWidth={1.5} /></span>
-          </Spotlight></Reveal>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function Industries() {
   const start = useStart();
   return (
     <section className="block" id="industries" aria-labelledby="ind-title">
       <div className="wrap">
         <div className="block-head">
-          <div><Reveal><p className="eyebrow">Industries</p></Reveal><Words as="h2" id="ind-title" className="mega-2" text="Coverage that fits how you work." /></div>
+          <div><Reveal><p className="eyebrow">Industries</p></Reveal><Words as="h2" id="ind-title" className="mega-2" text="Insurance for your industry." tail="Coverage picked for how you work." /></div>
           <Reveal delay={0.15}><p className="lede">Pick your industry and we’ll pre-select the coverage businesses like yours usually carry.</p></Reveal>
         </div>
         <div className="ind-grid">
@@ -222,7 +153,7 @@ function CoverageExplorer() {
     <section className="block" id="coverage" aria-labelledby="cov-title">
       <div className="wrap">
         <div className="block-head">
-          <div><Reveal><p className="eyebrow">Coverage guide</p></Reveal><Words as="h2" id="cov-title" className="mega-2" text="Commercial coverage, in plain English." /></div>
+          <div><Reveal><p className="eyebrow">Coverage guide</p></Reveal><Words as="h2" id="cov-title" className="mega-2" text="Coverage, explained." tail="In plain English." /></div>
           <Reveal delay={0.15}><p className="lede">What each policy pays for, what it doesn’t, and who usually needs it.</p></Reveal>
         </div>
         <Reveal className="explorer">
@@ -258,6 +189,7 @@ const FAQS = [
   ["Does it cost anything to use Keel?", "No. Carriers pay us a commission when you buy a policy. Your premium is the same as it would be if you went to the carrier directly."],
   ["What do I need to get a quote?", "Just the basics: what your business does, where it’s located, your expected revenue and how many people work there. For the final policy, an advisor may ask for details like your FEIN or your current policy."],
   ["How accurate are the quotes?", "Quotes are based on your answers. The carrier confirms the final price when it reviews your application, so the more accurate your answers, the closer the quote."],
+  ["How does Keel rank quotes?", "Best value weighs each quote’s price against the carrier’s financial strength rating, so a slightly cheaper quote from a weaker carrier doesn’t automatically come first. You can also sort by lowest price or top rated."],
   ["How fast can my coverage start?", "Often the same day. Once you pick a quote, an advisor confirms the details, you sign and pay online, and your certificate of insurance is emailed to you."],
   ["Will I get flooded with calls?", "No. An advisor contacts you only after you choose a quote or ask for help."],
   ["I already have insurance. Should I still compare?", "Yes. Rates change every year. If we find a better price, we can start the new policy the day your current one renews, so there’s no gap in coverage."],
@@ -267,7 +199,7 @@ function Faq() {
   return (
     <section className="block" id="faq" aria-labelledby="faq-title">
       <div className="wrap faq-grid">
-        <div><Reveal><p className="eyebrow">FAQ</p></Reveal><Words as="h2" id="faq-title" className="mega-2" text="Questions, answered." /></div>
+        <div><Reveal><p className="eyebrow">FAQ</p></Reveal><Words as="h2" id="faq-title" className="mega-2" text="Questions." tail="Answered." /></div>
         <Reveal className="faq">
           {FAQS.map(([q, ans], i) => <details key={q} open={i === 0}><summary>{q}</summary><p>{ans}</p></details>)}
         </Reveal>
@@ -312,9 +244,10 @@ export default function Home() {
   return (
     <main>
       <Hero />
-      <Showcase />
+      <Tour />
+      <Features />
       <Manifesto />
-      <Bento />
+      <PhoneRow />
       <Industries />
       <CoverageExplorer />
       <Faq />

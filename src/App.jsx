@@ -24,7 +24,6 @@ function Shell() {
       <ScrollToTop />
       {!inFlow && <ScrollProgress />}
       {!inFlow && <Header />}
-      <div className="grain" aria-hidden="true" />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/quote" element={<Quote />} />
