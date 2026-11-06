@@ -1,0 +1,29 @@
+{
+  "name": "keel-insurance",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Keel: commercial insurance, compared.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "build:artifact": "VITE_PREVIEW=1 vite build --base ./ --outDir dist-artifact && node scripts/inline-artifact.mjs",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@vercel/analytics": "1.4.1",
+    "framer-motion": "11.18.2",
+    "lucide-react": "0.475.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-router-dom": "6.28.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "4.3.4",
+    "vite": "6.0.11"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
