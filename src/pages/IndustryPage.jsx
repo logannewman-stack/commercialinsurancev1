@@ -6,6 +6,7 @@ import { BUSINESS_TYPES, CLASS } from "../data/industries.js";
 import { LINE, recommend } from "../data/coverage.js";
 import { useQuote } from "../lib/store.jsx";
 import { useTitle } from "../lib/useTitle.js";
+import { Reveal, Spotlight, Words } from "../components/fx.jsx";
 
 const GENERAL_FAQS = [
   ["How does Keel make money?", "Carriers pay Keel a commission when you buy a policy. Your price is the same as going to the carrier directly, and comparing is free."],
@@ -30,12 +31,13 @@ export default function IndustryPage() {
 
   return (
     <main className="ind-page">
-      <section className="hero">
+      <section className="hero ind-hero">
+        <div className="aurora" aria-hidden="true"><i /><i /><i /></div>
         <div className="wrap hero-grid">
           <div className="hero-copy">
             <nav className="crumbs" aria-label="Breadcrumb"><Link to="/">Home</Link><span aria-hidden="true">/</span><span>{page.name}</span></nav>
             <p className="eyebrow marked">Insurance for {c.plural}</p>
-            <h1 className="display display-sm">{page.h1}</h1>
+            <Words className="display display-sm" text={page.h1} />
             <p className="lede">{page.intro}</p>
             <div className="hero-cta">
               <button type="button" className="btn btn-primary btn-lg" onClick={() => start()}>Get your quotes <ArrowRight size={18} aria-hidden="true" /></button>
@@ -46,7 +48,7 @@ export default function IndustryPage() {
               <div className="quick">{types.map((t) => <button type="button" key={t.label} className="chip-btn" onClick={() => start(t)}>{t.label}</button>)}</div>
             </div>
           </div>
-          <aside className="carry-card" aria-label={`Coverage ${c.plural} usually carry`}>
+          <Reveal as="aside" delay={0.3} className="carry-card" aria-label={`Coverage ${c.plural} usually carry`}>
             <p className="eyebrow">What {c.plural} usually carry</p>
             <ul className="carry-list">
               {recs.map((id) => (
@@ -57,7 +59,7 @@ export default function IndustryPage() {
               ))}
             </ul>
             <button type="button" className="btn btn-accent btn-block" onClick={() => start()}>Compare quotes <ArrowRight size={16} aria-hidden="true" /></button>
-          </aside>
+          </Reveal>
         </div>
       </section>
 
@@ -67,9 +69,9 @@ export default function IndustryPage() {
             <div><p className="eyebrow">Common risks</p><h2 className="h2">What {c.plural} need protection from.</h2></div>
           </div>
           <div className="risk-grid">
-            {page.risks.map(([t, d]) => <div className="risk" key={t}><h3>{t}</h3><p>{d}</p></div>)}
+            {page.risks.map(([t, d], i) => <Reveal className="risk" key={t} delay={i * 0.07}><h3>{t}</h3><p>{d}</p></Reveal>)}
           </div>
-          <div className="ex-claim claim-wide"><p className="col-title">Example claim</p><p>{page.claim}</p></div>
+          <Reveal className="ex-claim claim-wide"><p className="col-title">Example claim</p><p>{page.claim}</p></Reveal>
         </div>
       </section>
 
@@ -80,12 +82,12 @@ export default function IndustryPage() {
             <p className="lede">Keel pre-selects these when you start a quote. You can add or remove anything before you compare.</p>
           </div>
           <div className="cov-cards">
-            {recs.map((id) => (
-              <div className="cov-card" key={id}>
+            {recs.map((id, i) => (
+              <Reveal key={id} delay={i * 0.08}><Spotlight className="cov-card">
                 <h3>{LINE[id].name}</h3>
                 <p className="muted">{LINE[id].desc}</p>
                 <ul className="ticks-list">{LINE[id].covers.map((t) => <li key={t}><Check size={15} aria-hidden="true" />{t}</li>)}</ul>
-              </div>
+              </Spotlight></Reveal>
             ))}
           </div>
         </div>
@@ -100,7 +102,8 @@ export default function IndustryPage() {
         </div>
       </section>
 
-      <section className="cta-band">
+      <section className="cta-band ind-cta">
+        <div className="aurora dark" aria-hidden="true"><i /><i /><i /></div>
         <div className="wrap cta-row">
           <div><p className="eyebrow">{page.name}</p><h2 className="h2">See what your business should be paying.</h2></div>
           <button type="button" className="btn btn-accent btn-lg" onClick={() => start()}>Get your quotes <ArrowRight size={18} aria-hidden="true" /></button>

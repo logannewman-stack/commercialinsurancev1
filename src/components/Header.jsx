@@ -23,11 +23,20 @@ export function useSectionLink() {
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
   const toSection = useSectionLink();
   const { pathname } = useLocation();
   useEffect(() => {
-    const on = () => setScrolled(window.scrollY > 8);
+    let last = window.scrollY;
+    const on = () => {
+      const y = window.scrollY;
+      setScrolled(y > 8);
+      // Tuck the nav away while reading downward; bring it back on any upward scroll.
+      if (y > 160 && y > last + 6) setHidden(true);
+      else if (y < last - 6 || y < 160) setHidden(false);
+      last = y;
+    };
     on(); window.addEventListener("scroll", on, { passive: true });
     return () => window.removeEventListener("scroll", on);
   }, []);
@@ -40,8 +49,8 @@ export default function Header() {
   }, [open]);
 
   return (
-    <header className={`site-header${scrolled ? " scrolled" : ""}`}>
-      <div className="wrap header-row">
+    <header className={`site-header${scrolled ? " scrolled" : ""}${hidden && !open ? " tucked" : ""}`}>
+      <div className="nav-pill">
         <Link to="/" className="logo-link" aria-label="Keel home"><Logo /></Link>
         <nav className="nav" aria-label="Main">
           {LINKS.map((l) => <a key={l.id} href={`#${l.id}`} onClick={toSection(l.id)}>{l.label}</a>)}
@@ -55,10 +64,9 @@ export default function Header() {
       </div>
       <AnimatePresence>
         {open && (
-          <motion.nav className="mobile-nav" aria-label="Mobile" initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.18 }}>
-            <div className="wrap">
-              {LINKS.map((l) => <a key={l.id} href={`#${l.id}`} onClick={(e) => { setOpen(false); toSection(l.id)(e); }}>{l.label}</a>)}
-            </div>
+          <motion.nav className="mobile-nav" aria-label="Mobile" initial={{ opacity: 0, y: -8, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -8, scale: 0.98 }} transition={{ duration: 0.2 }}>
+            {LINKS.map((l) => <a key={l.id} href={`#${l.id}`} onClick={(e) => { setOpen(false); toSection(l.id)(e); }}>{l.label}</a>)}
+            <Link to="/quote" className="btn btn-primary btn-block" onClick={() => setOpen(false)}>Get a quote</Link>
           </motion.nav>
         )}
       </AnimatePresence>

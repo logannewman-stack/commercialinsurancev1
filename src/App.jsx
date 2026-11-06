@@ -13,15 +13,18 @@ import IndustryPage from "./pages/IndustryPage.jsx";
 import { Privacy, Terms } from "./pages/Legal.jsx";
 import { Analytics } from "@vercel/analytics/react";
 import { QuoteProvider } from "./lib/store.jsx";
+import { ScrollProgress } from "./components/fx.jsx";
 import { IS_PREVIEW } from "./config.js";
 
 function Shell() {
   const { pathname } = useLocation();
   const inFlow = pathname.startsWith("/quote/") || pathname === "/quote";
   return (
-    <>
+    <div className={`app${inFlow ? " in-flow" : ""}`}>
       <ScrollToTop />
+      {!inFlow && <ScrollProgress />}
       {!inFlow && <Header />}
+      <div className="grain" aria-hidden="true" />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/quote" element={<Quote />} />
@@ -37,7 +40,7 @@ function Shell() {
       </Routes>
       {!inFlow && <Footer />}
       {!IS_PREVIEW && <Analytics />}
-    </>
+    </div>
   );
 }
 
@@ -48,7 +51,7 @@ export default function App() {
   return (
     <MotionConfig reducedMotion="user">
       <QuoteProvider>
-        <Router>
+        <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
           <Shell />
         </Router>
       </QuoteProvider>

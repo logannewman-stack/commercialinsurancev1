@@ -40,6 +40,7 @@ export default function Footer() {
           {DEMO_QUOTES ? " Quotes on this site are sample estimates from demo carriers until carrier connections go live." : ""}
         </p>
       </div>
+      <div className="footer-giant" aria-hidden="true"><span>keel</span></div>
     </footer>
   );
 }
