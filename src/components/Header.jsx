@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Logo from "./Logo.jsx";
+import { COMPANY } from "../config.js";
 
 const LINKS = [
   { id: "how", label: "How it works" },
@@ -51,7 +52,7 @@ export default function Header() {
   return (
     <header className={`site-header${scrolled ? " scrolled" : ""}${hidden && !open ? " tucked" : ""}`}>
       <div className="nav-pill">
-        <Link to="/" className="logo-link" aria-label="Keel home"><Logo /></Link>
+        <Link to="/" className="logo-link" aria-label={`${COMPANY.name} home`}><Logo /></Link>
         <nav className="nav" aria-label="Main">
           {LINKS.map((l) => <a key={l.id} href={`#${l.id}`} onClick={toSection(l.id)}>{l.label}</a>)}
         </nav>

@@ -5,7 +5,8 @@
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Check, FileText, Search } from "lucide-react";
-import { Mark } from "./Logo.jsx";
+import { LogoMark } from "./Logo.jsx";
+import { COMPANY } from "../config.js";
 
 export function Phone({ children, className = "" }) {
   return (
@@ -28,7 +29,7 @@ function Chrome({ step, children }) {
     <div className="ps">
       <div className="ps-status" aria-hidden="true"><span>9:41</span><span className="ps-icons"><i /><i /><i /></span></div>
       <div className="ps-app">
-        <span className="ps-brand"><Mark className="ps-mark" /> keel</span>
+        <span className="ps-brand"><LogoMark className="ps-mark" compact /> {COMPANY.name}</span>
         {step && <span className="ps-step">{step}</span>}
       </div>
       <div className="ps-body">{children}</div>
@@ -145,7 +146,7 @@ export function DoneScreen({ active }) {
         <Check aria-hidden="true" />
       </motion.span>
       <p className="ps-h center">Request received.</p>
-      <p className="ps-sub center">Reference KL-7Q2M4C</p>
+      <p className="ps-sub center">Reference LD-7Q2M4C</p>
       <div className="ps-card">
         <div><span>Carrier</span><b>Everstone</b></div>
         <div><span>Starts</span><b>Tomorrow</b></div>

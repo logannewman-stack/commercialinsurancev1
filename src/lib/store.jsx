@@ -1,7 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 
-const KEY = "keel.quote.v2";
-const CONTACT_KEY = "keel.contact.v2";
+const KEY = "site.quote.v2";
+const CONTACT_KEY = "site.contact.v2";
 
 export const DEFAULT_ANSWERS = {
   industry: null, businessType: "", zip: "", space: null, sqft: 2500, revenue: 500000,

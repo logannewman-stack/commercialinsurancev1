@@ -1,17 +1,23 @@
-export function Mark({ className = "mark" }) {
+import { COMPANY } from "../config.js";
+
+/*
+  The company's logo from src/brand.js, or a "Your logo here" placeholder until one is set.
+  compact: the short placeholder used inside the small product screens.
+*/
+export function LogoMark({ className = "", compact = false }) {
+  if (COMPANY.logo) return <img className={`logo-img ${className}`} src={COMPANY.logo} alt="" />;
   return (
-    <svg className={className} viewBox="0 0 32 32" aria-hidden="true">
-      <rect className="mark-ink" x="2" y="6" width="28" height="5" rx="2.5" />
-      <rect className="mark-ink" x="7" y="13.5" width="18" height="5" rx="2.5" />
-      <rect className="mark-gold" x="12" y="21" width="8" height="5" rx="2.5" />
-    </svg>
+    <span className={`logo-slot ${compact ? "compact " : ""}${className}`} aria-hidden="true">
+      {compact ? "Logo" : <><span className="ls-long">Your logo here</span><span className="ls-short">Logo</span></>}
+    </span>
   );
 }
+
 export default function Logo() {
   return (
     <span className="logo">
-      <Mark />
-      <span className="wordmark">keel</span>
+      <LogoMark />
+      {!(COMPANY.logo && COMPANY.logoHasName) && <span className="wordmark">{COMPANY.name}</span>}
     </span>
   );
 }

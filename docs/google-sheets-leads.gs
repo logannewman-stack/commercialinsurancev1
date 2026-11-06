@@ -1,5 +1,5 @@
 /*
-  Free lead log: every Keel lead becomes a row in a Google Sheet.
+  Free lead log: every lead becomes a row in a Google Sheet.
 
   1. Create a Google Sheet.
   2. Extensions → Apps Script. Delete what's there and paste this file.

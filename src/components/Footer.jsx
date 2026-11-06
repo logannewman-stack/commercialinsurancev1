@@ -1,8 +1,32 @@
+import { useLayoutEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import Logo from "./Logo.jsx";
 import { useSectionLink } from "./Header.jsx";
 import { COMPANY, DEMO_QUOTES } from "../config.js";
 import { INDUSTRY_PAGES } from "../data/industryPages.js";
+
+/* The company name, as large as fits on one line. */
+function GiantName() {
+  const box = useRef(null);
+  const text = useRef(null);
+  useLayoutEffect(() => {
+    const fit = () => {
+      const b = box.current, t = text.current;
+      if (!b || !t) return;
+      const cs = getComputedStyle(b);
+      const room = b.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+      t.style.fontSize = "100px";
+      const w = t.getBoundingClientRect().width;
+      if (w > 0) t.style.fontSize = `${Math.min(400, (100 * room) / w)}px`;
+    };
+    fit();
+    document.fonts?.ready.then(fit);
+    const ro = new ResizeObserver(fit);
+    ro.observe(box.current);
+    return () => ro.disconnect();
+  }, []);
+  return <div className="footer-giant" ref={box} aria-hidden="true"><span ref={text}>{COMPANY.name}</span></div>;
+}
 
 export default function Footer() {
   const toSection = useSectionLink();
@@ -36,11 +60,11 @@ export default function Footer() {
         </nav>
         <p className="fine footer-fine">
           © {new Date().getFullYear()} {COMPANY.legalName}. {COMPANY.licenseLine ? COMPANY.licenseLine + ". " : ""}
-          Keel is an independent insurance agency. Coverage is provided by the carrier you choose and is subject to its underwriting and policy terms.
+          {COMPANY.name} is an independent insurance agency. Coverage is provided by the carrier you choose and is subject to its underwriting and policy terms.
           {DEMO_QUOTES ? " Quotes on this site are sample estimates from demo carriers until carrier connections go live." : ""}
         </p>
       </div>
-      <div className="footer-giant" aria-hidden="true"><span>keel</span></div>
+      <GiantName />
     </footer>
   );
 }

@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import { X } from "lucide-react";
 import Logo from "./Logo.jsx";
+import { COMPANY } from "../config.js";
 
 /* The slim top bar used on the quote start, upload and review screens. */
 export default function FlowTop({ label }) {
   return (
     <div className="qtop">
       <div className="wrap qtop-row">
-        <Link to="/" className="logo-link" aria-label="Keel home"><Logo /></Link>
+        <Link to="/" className="logo-link" aria-label={`${COMPANY.name} home`}><Logo /></Link>
         <span className="flow-label">{label}</span>
         <Link to="/" className="icon-btn" aria-label="Save and exit"><X size={18} /></Link>
       </div>

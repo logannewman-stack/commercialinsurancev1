@@ -31,7 +31,7 @@ export const INDUSTRY_PAGES = [
     ],
     claim: "A plumber’s fitting fails after a remodel and floods a finished basement. Repairs and the homeowner’s hotel stay come to about $42,000.",
     faqs: [
-      ["What is a certificate of insurance?", "A one-page document that proves you’re insured. Clients and general contractors usually ask for one before you start work, and some want to be added as an additional insured. Keel advisors can issue certificates quickly once you’re covered."],
+      ["What is a certificate of insurance?", "A one-page document that proves you’re insured. Clients and general contractors usually ask for one before you start work, and some want to be added as an additional insured. Our advisors can issue certificates quickly once you’re covered."],
       ["Does general liability cover my own tools?", "No. General liability covers damage you cause to other people’s property. Tools and equipment coverage protects your own gear on job sites and in your truck."],
     ],
   },

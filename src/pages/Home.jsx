@@ -18,7 +18,7 @@ import { computeQuotes, SORTS } from "../lib/pricing.js";
 import { money } from "../lib/format.js";
 import { DEFAULT_OPTIONS, isComplete, useQuote } from "../lib/store.jsx";
 import { useTitle } from "../lib/useTitle.js";
-import { DEMO_QUOTES } from "../config.js";
+import { COMPANY, DEMO_QUOTES } from "../config.js";
 
 const INDUSTRY_CARDS = [
   ["restaurant", Utensils], ["contractor", HardHat], ["retail", Store], ["professional", Briefcase],
@@ -42,7 +42,7 @@ function Hero() {
         <Reveal><p className="pill-eyebrow"><span className="pe-dot" />Commercial insurance, compared</p></Reveal>
         <Words className="mega" text="Stop overpaying for business insurance." mark={1} />
         <Reveal delay={0.45}>
-          <p className="lede hero2-lede">Tell us about your business once. Keel collects quotes from top-rated carriers, lines them up side by side, and shows you the best coverage for the lowest price.</p>
+          <p className="lede hero2-lede">Tell us about your business once. We collect quotes from top-rated carriers, line them up side by side, and show you the best coverage for the lowest price.</p>
         </Reveal>
         <Reveal delay={0.6} className="hero2-search">
           <BusinessSearch label="What kind of business do you run?" placeholder="Try café, plumber or dentist"
@@ -102,7 +102,7 @@ function Manifesto() {
           <Reveal><SpreadChart /></Reveal>
           <div className="mani-copy">
             <Reveal><h3 className="mani-h">One application. Every price on the table.</h3></Reveal>
-            <Reveal delay={0.1}><p className="mani-p">Keel puts the same application in front of every carrier that writes businesses like yours, so you see the whole spread instead of the one price you happened to get.</p></Reveal>
+            <Reveal delay={0.1}><p className="mani-p">We put the same application in front of every carrier that writes businesses like yours, so you see the whole spread instead of the one price you happened to get.</p></Reveal>
             <dl className="stats-dark">
               <div><dd><Counter to={8} /></dd><dt>Questions to answer</dt></div>
               <div><dd><Counter to={3} suffix=" min" /></dd><dt>Average time to compare</dt></div>
@@ -188,11 +188,11 @@ function CoverageExplorer() {
 }
 
 const FAQS = [
-  ["Is Keel an insurance company?", "No. Keel is an independent insurance agency. We compare quotes from insurance carriers and help you buy the policy. The carrier you choose is the one that insures you and pays claims."],
-  ["Does it cost anything to use Keel?", "No. Carriers pay us a commission when you buy a policy. Your premium is the same as it would be if you went to the carrier directly."],
+  [`Is ${COMPANY.name} an insurance company?`, "No. We’re an independent insurance agency. We compare quotes from insurance carriers and help you buy the policy. The carrier you choose is the one that insures you and pays claims."],
+  ["Does it cost anything to compare?", "No. Carriers pay us a commission when you buy a policy. Your premium is the same as it would be if you went to the carrier directly."],
   ["What do I need to get a quote?", "Just the basics: what your business does, where it’s located, your expected revenue and how many people work there. For the final policy, an advisor may ask for details like your FEIN or your current policy."],
   ["How accurate are the quotes?", "Quotes are based on your answers. The carrier confirms the final price when it reviews your application, so the more accurate your answers, the closer the quote."],
-  ["How does Keel rank quotes?", "Best value weighs each quote’s price against the carrier’s financial strength rating, so a slightly cheaper quote from a weaker carrier doesn’t automatically come first. You can also sort by lowest price or top rated."],
+  ["How do you rank quotes?", "Best value weighs each quote’s price against the carrier’s financial strength rating, so a slightly cheaper quote from a weaker carrier doesn’t automatically come first. You can also sort by lowest price or top rated."],
   ["How fast can my coverage start?", "Often the same day. Once you pick a quote, an advisor confirms the details, you sign and pay online, and your certificate of insurance is emailed to you."],
   ["Will I get flooded with calls?", "No. An advisor contacts you only after you choose a quote or ask for help."],
   ["I already have insurance. Should I still compare?", "Yes. Rates change every year. If we find a better price, we can start the new policy the day your current one renews, so there’s no gap in coverage."],

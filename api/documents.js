@@ -17,6 +17,7 @@
   before upload and caps the total size.
 */
 import Anthropic from "@anthropic-ai/sdk";
+import { BRAND } from "../src/brand.js";
 
 const MODEL = process.env.ANTHROPIC_MODEL || "claude-opus-5-5";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -146,7 +147,7 @@ export default async function handler(req, res) {
   }
   if (total > MAX_TOTAL_B64) return res.status(413).json({ error: "Those files are too large together. Upload fewer pages, or email them to us." });
 
-  const id = "KD-" + crypto.randomUUID().replace(/-/g, "").slice(0, 6).toUpperCase();
+  const id = "DOC-" + crypto.randomUUID().replace(/-/g, "").slice(0, 6).toUpperCase();
   // Log metadata only. Document contents never go to the logs.
   console.log("[documents]", JSON.stringify({ id, email: body.email, files: body.files.map((f) => ({ name: f.name, type: f.type, kind: f.kind, kb: Math.round(f.data.length * 0.75 / 1024) })) }));
 
@@ -170,7 +171,7 @@ export default async function handler(req, res) {
         method: "POST",
         headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, "Content-Type": "application/json" },
         body: JSON.stringify({
-          from: process.env.LEAD_FROM_EMAIL || "Keel Leads <onboarding@resend.dev>",
+          from: process.env.LEAD_FROM_EMAIL || `${BRAND.name.replace(/["<>,]/g, "")} Leads <onboarding@resend.dev>`,
           to: process.env.LEAD_NOTIFY_EMAIL.split(",").map((s) => s.trim()).filter(Boolean),
           reply_to: body.email,
           subject: `Documents uploaded: ${extracted?.business_name || body.email}`,

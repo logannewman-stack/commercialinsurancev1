@@ -83,7 +83,7 @@ export async function readDocuments(items, contact) {
     if (!res.ok) return { ok: false, error: body.error || "We couldn’t upload your documents. Try again." };
     return body;
   } catch {
-    return { ok: false, error: "We couldn’t reach Keel. Check your connection and try again." };
+    return { ok: false, error: "We couldn’t upload your documents. Check your connection and try again." };
   }
 }
 

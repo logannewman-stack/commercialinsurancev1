@@ -137,9 +137,9 @@ const CARDS = [
   { k: "Live estimate", title: "Your price takes shape as you answer.", UI: EstimateUI, link: ["Start a quote", "/quote"],
     body: "Every answer narrows your range, so you know what to expect before you reach the last question." },
   { k: "One application", title: "Every carrier, at the same time.", UI: CarriersUI, link: ["See how it works", "#how"],
-    body: "Keel sends your details to every carrier that insures businesses like yours. The ones that pass tell you why." },
+    body: "We send your details to every carrier that insures businesses like yours. The ones that pass tell you why." },
   { k: "Ranked by value", title: "The best quote isn’t always the cheapest.", UI: RankUI, link: ["How we rank quotes", "#faq"],
-    body: "Keel weighs price against each carrier’s financial strength rating, then lets you sort any way you like." },
+    body: "We weigh price against each carrier’s financial strength rating, then lets you sort any way you like." },
   { k: "Get covered", title: "Request your policy in one step.", UI: RequestUI, link: ["Get your quotes", "/quote"],
     body: "Pick a start date and a payment plan. Nothing is charged until a licensed advisor confirms the details." },
 ];

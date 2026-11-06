@@ -109,7 +109,7 @@ export default function QuoteUpload() {
               ) : (
                 <>
                   <h2 className="up-done-title">This preview can’t read documents.</h2>
-                  <p className="q-sub">Nothing was uploaded. On the live site, Keel reads your documents automatically and fills in your quote. Here’s what that looks like with a sample certificate.</p>
+                  <p className="q-sub">Nothing was uploaded. On the live site, we read your documents automatically and fills in your quote. Here’s what that looks like with a sample certificate.</p>
                   <div className="up-actions"><button type="button" className="btn btn-primary" onClick={useSample}>See a sample result</button><Link to="/quote/industry" className="link-btn">Answer the questions instead</Link></div>
                 </>
               )}
@@ -169,7 +169,7 @@ export default function QuoteUpload() {
                 </ul>
               </div>
               <p className="fine up-fine">
-                We use an AI service to read your documents and fill in your quote. Your documents are shared only with your Keel advisor and the carriers that quote you.
+                We use an AI service to read your documents and fill in your quote. Your documents are shared only with your advisor and the carriers that quote you.
                 {IS_PREVIEW && " In this preview, nothing is uploaded."}
               </p>
               {IS_PREVIEW && <button type="button" className="link-btn" onClick={useSample}>See how it works with a sample certificate →</button>}

@@ -7,10 +7,13 @@
     LEAD_WEBHOOK_URL   Any URL that accepts a JSON POST (Zapier, Make, a Slack workflow, your CRM).
     RESEND_API_KEY     A Resend API key (resend.com) to email each lead.
     LEAD_NOTIFY_EMAIL  Where lead emails go. Comma-separate several addresses.
-    LEAD_FROM_EMAIL    Optional sender, e.g. "Keel <hello@yourdomain.com>" (needs a verified domain in Resend).
+    LEAD_FROM_EMAIL    Optional sender, e.g. "Your Company <hello@yourdomain.com>" (needs a verified domain in Resend).
     SEND_CUSTOMER_EMAILS  Set to "true" to also email customers a confirmation. Needs RESEND_API_KEY and
                           LEAD_FROM_EMAIL. Never sent while the site is showing demo quotes.
 */
+import { BRAND } from "../src/brand.js";
+
+const FROM_FALLBACK = `${BRAND.name.replace(/["<>,]/g, "")} Leads <onboarding@resend.dev>`;
 const STAGES = { quote_request: "Quote request", callback: "Callback request", bind_request: "Policy request" };
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
@@ -58,14 +61,14 @@ function customerEmail(lead) {
   if (lead.stage === "quote_request") {
     const quotes = (lead.quotes || []).map((q) => `  ${q.carrier}: $${q.monthly}/mo`).join("\n");
     return {
-      subject: `Your Keel quotes for ${c.business || "your business"}`,
-      text: `${hi}\n\nThanks for comparing with Keel. Here are your top quotes:\n\n${quotes}\n\nWhen you’re ready, choose a quote on the site, or reply to this email and a licensed advisor will help.\n\nKeel`,
+      subject: `Your ${BRAND.name} quotes for ${c.business || "your business"}`,
+      text: `${hi}\n\nThanks for comparing with ${BRAND.name}. Here are your top quotes:\n\n${quotes}\n\nWhen you’re ready, choose a quote on the site, or reply to this email and a licensed advisor will help.\n\n${BRAND.name}`,
     };
   }
   if (lead.stage === "bind_request") {
     return {
       subject: `We received your request for ${lead.carrier}`,
-      text: `${hi}\n\nWe received your request for a ${lead.carrier} policy starting ${lead.startDate}. Your reference is ${lead.id}.\n\nA licensed advisor will contact you shortly to confirm the details. Nothing has been charged.\n\nKeel`,
+      text: `${hi}\n\nWe received your request for a ${lead.carrier} policy starting ${lead.startDate}. Your reference is ${lead.id}.\n\nA licensed advisor will contact you shortly to confirm the details. Nothing has been charged.\n\n${BRAND.name}`,
     };
   }
   return null;
@@ -96,7 +99,7 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: body.stage === "callback" ? "A phone number is required" : "A valid email is required" });
   }
 
-  const id = "KL-" + crypto.randomUUID().replace(/-/g, "").slice(0, 6).toUpperCase();
+  const id = "LD-" + crypto.randomUUID().replace(/-/g, "").slice(0, 6).toUpperCase();
   const lead = { id, receivedAt: new Date().toISOString(), ...body };
   console.log("[lead]", JSON.stringify(lead));
 
@@ -116,7 +119,7 @@ export default async function handler(req, res) {
         method: "POST",
         headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, "Content-Type": "application/json" },
         body: JSON.stringify({
-          from: process.env.LEAD_FROM_EMAIL || "Keel Leads <onboarding@resend.dev>",
+          from: process.env.LEAD_FROM_EMAIL || FROM_FALLBACK,
           to: process.env.LEAD_NOTIFY_EMAIL.split(",").map((s) => s.trim()).filter(Boolean),
           reply_to: EMAIL_RE.test(email) ? email : undefined,
           subject: `${STAGES[lead.stage]}: ${contact.business || contact.name || "New lead"}`,

@@ -1,12 +1,13 @@
 /*
-  "How Keel works": a tabbed walkthrough of the real product, one full desktop
+  "How it works": a tabbed walkthrough of the real product, one full desktop
   screen per step, auto-advancing while it's on screen.
 */
 import { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion, useInView, useReducedMotion } from "framer-motion";
 import { ArrowLeft, ArrowRight, Check, Lock } from "lucide-react";
 import { Canvas, Window } from "./Canvas.jsx";
-import { Mark } from "./Logo.jsx";
+import { LogoMark } from "./Logo.jsx";
+import { COMPANY } from "../config.js";
 import { Reveal, Words } from "./fx.jsx";
 import { CARRIERS, RATING } from "../data/carriers.js";
 import { LINE } from "../data/coverage.js";
@@ -46,7 +47,7 @@ function useTimeline(active, total, every = 700) {
 }
 
 function Brand() {
-  return <span className="m-brand"><Mark className="m-mark" />keel</span>;
+  return <span className="m-brand"><LogoMark className="m-mark" compact />{COMPANY.name}</span>;
 }
 function SiteTop() {
   return (
@@ -220,15 +221,15 @@ export function CheckoutScreen({ active, byValue, R }) {
 }
 
 const TABS = [
-  { id: "tell", label: "Tell us", title: "Tell us about your business", url: "keel · Get a quote", Screen: QuoteScreen,
+  { id: "tell", label: "Tell us", title: "Tell us about your business", url: `${COMPANY.name} · Get a quote`, Screen: QuoteScreen,
     body: "Eight quick questions, one per screen. Your price range updates with every answer, so there’s no surprise at the end." },
-  { id: "shop", label: "We shop", title: "We shop every carrier", url: "keel · Shopping the market", Screen: ShopScreen,
+  { id: "shop", label: "We shop", title: "We shop every carrier", url: `${COMPANY.name} · Shopping the market`, Screen: ShopScreen,
     body: "One application goes to every carrier that insures businesses like yours. Quotes come back in seconds, and carriers that pass tell you why." },
-  { id: "compare", label: "Compare", title: "Compare by value", url: "keel · Your quotes", Screen: ResultsScreen,
+  { id: "compare", label: "Compare", title: "Compare by value", url: `${COMPANY.name} · Your quotes`, Screen: ResultsScreen,
     body: "Price, coverage and each carrier’s financial strength in one list. Change limits or deductibles and every quote updates." },
-  { id: "side", label: "Side by side", title: "Line them up", url: "keel · Compare quotes", Screen: CompareScreen,
+  { id: "side", label: "Side by side", title: "Line them up", url: `${COMPANY.name} · Compare quotes`, Screen: CompareScreen,
     body: "Pick up to three quotes and compare every coverage line, fee and extra in one table." },
-  { id: "covered", label: "Get covered", title: "Request your policy", url: "keel · Request your policy", Screen: CheckoutScreen,
+  { id: "covered", label: "Get covered", title: "Request your policy", url: `${COMPANY.name} · Request your policy`, Screen: CheckoutScreen,
     body: "Choose a start date and payment plan. A licensed advisor confirms the details, and nothing is charged until it’s final." },
 ];
 const DUR = 7000;
@@ -254,7 +255,7 @@ export default function Tour() {
     <section className="tour" id="how" ref={ref} aria-labelledby="how-title">
       <div className="wrap">
         <div className="sec-head">
-          <Words as="h2" id="how-title" className="mega-2" text="How Keel works." tail="From first question to covered, in about three minutes." />
+          <Words as="h2" id="how-title" className="mega-2" text="How it works." tail="From first question to covered, in about three minutes." />
         </div>
         <Reveal className="tour-stage" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
           <AnimatePresence mode="wait" initial={false}>

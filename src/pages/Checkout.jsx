@@ -9,7 +9,7 @@ import { computeQuotes, lineDetail } from "../lib/pricing.js";
 import { initials, money } from "../lib/format.js";
 import { submitLead } from "../lib/leads.js";
 import { isComplete, useQuote } from "../lib/store.jsx";
-import { DEMO_QUOTES } from "../config.js";
+import { COMPANY, DEMO_QUOTES } from "../config.js";
 import { useTitle } from "../lib/useTitle.js";
 
 const iso = (d) => new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
@@ -62,7 +62,7 @@ export default function Checkout() {
     });
     setBusy(false);
     if (!res.ok && !res.preview) { setErr([null, "We couldn’t send your request. Check your connection and try again."]); return; }
-    const ref = res.id || "KL-" + Math.random().toString(36).slice(2, 8).toUpperCase();
+    const ref = res.id || "LD-" + Math.random().toString(36).slice(2, 8).toUpperCase();
     setSubmission({ ref, carrier: q.c.name, plan, start, monthly: q.monthly, annual: q.annual, lines: q.lines.map((l) => l.id), preview: !!res.preview, at: Date.now() });
     navigate("/confirmation");
   };
@@ -126,7 +126,7 @@ export default function Checkout() {
 
             <label className="agree">
               <input id="c-agree" type="checkbox" checked={agree} onChange={fix("c-agree", setAgree)} {...invalid("c-agree")} />
-              <span>My answers are accurate to the best of my knowledge, and Keel may share them with {q.c.name} to finalize this policy.</span>
+              <span>My answers are accurate to the best of my knowledge, and {COMPANY.name} may share them with {q.c.name} to finalize this policy.</span>
             </label>
 
             <p className="flow-err" role="alert">{err ? err[1] : ""}</p>

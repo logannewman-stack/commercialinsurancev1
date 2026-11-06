@@ -1,4 +1,4 @@
-/* Keel design tokens. Layout: airy single column, hairline rules, one yellow accent that marks "the one you pick". */
+/* Design tokens. Layout: airy single column, hairline rules, one yellow accent that marks "the one you pick". */
 :root {
   --bg: #F3F5F4;
   --surface: #FFFFFF;
@@ -120,10 +120,19 @@ select.input { -webkit-appearance: none; appearance: none; padding-right: 2.4em;
 /* logo */
 .logo { display: inline-flex; align-items: center; gap: 9px; color: var(--ink); }
 .logo-link { text-decoration: none; display: inline-flex; border-radius: 8px; }
-.mark { width: 30px; height: 30px; flex: none; display: block; }
-.mark-ink { fill: currentColor; }
-.mark-gold { fill: var(--accent); }
-.wordmark { font-family: var(--font-display); font-stretch: 125%; font-weight: 720; font-size: 1.42rem; letter-spacing: -0.05em; line-height: 1; transform: translateY(-1px); }
+.logo-img { height: 32px; width: auto; max-width: 160px; flex: none; display: block; object-fit: contain; }
+/* placeholder until the company's logo is set in src/brand.js */
+.logo-slot { flex: none; display: inline-grid; place-items: center; height: 32px; padding: 0 10px; border: 1.5px dashed color-mix(in srgb, currentColor 45%, transparent); border-radius: 8px; font-family: var(--font-mono); font-size: 0.58rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; color: color-mix(in srgb, currentColor 70%, transparent); }
+.wordmark { font-family: var(--font-display); font-stretch: 112%; font-weight: 700; font-size: 1.12rem; letter-spacing: -0.03em; line-height: 1; white-space: nowrap; }
+.logo-slot .ls-short { display: none; }
+.logo-link, .logo { min-width: 0; }
+@media (max-width: 480px) {
+  .site-header .logo-slot .ls-long { display: none; }
+  .site-header .logo-slot .ls-short { display: inline; }
+  .site-header .wordmark { white-space: normal; font-size: 0.9rem; line-height: 1.05; max-width: 9em; }
+}
+/* smallest phones: the menu and the hero search still offer "Get a quote" */
+@media (max-width: 360px) { .site-header .header-actions .btn { display: none; } }
 
 /* header */
 .nav { display: flex; align-items: center; gap: 30px; }

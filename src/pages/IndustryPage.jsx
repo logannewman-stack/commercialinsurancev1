@@ -6,10 +6,11 @@ import { BUSINESS_TYPES, CLASS } from "../data/industries.js";
 import { LINE, recommend } from "../data/coverage.js";
 import { useQuote } from "../lib/store.jsx";
 import { useTitle } from "../lib/useTitle.js";
+import { COMPANY } from "../config.js";
 import { Reveal, Spotlight, Words } from "../components/fx.jsx";
 
 const GENERAL_FAQS = [
-  ["How does Keel make money?", "Carriers pay Keel a commission when you buy a policy. Your price is the same as going to the carrier directly, and comparing is free."],
+  [`How does ${COMPANY.name} make money?`, "Carriers pay us a commission when you buy a policy. Your price is the same as going to the carrier directly, and comparing is free."],
   ["How fast can coverage start?", "Often the same day. Once you choose a quote, a licensed advisor confirms the details, you sign and pay online, and your certificate of insurance arrives by email."],
 ];
 
@@ -79,7 +80,7 @@ export default function IndustryPage() {
         <div className="wrap">
           <div className="block-head">
             <div><p className="eyebrow">Coverage</p><h2 className="h2">The coverage, explained.</h2></div>
-            <p className="lede">Keel pre-selects these when you start a quote. You can add or remove anything before you compare.</p>
+            <p className="lede">We pre-select these when you start a quote. You can add or remove anything before you compare.</p>
           </div>
           <div className="cov-cards">
             {recs.map((id, i) => (

@@ -5,6 +5,7 @@ import { LINE } from "../data/coverage.js";
 import { money } from "../lib/format.js";
 import { useQuote } from "../lib/store.jsx";
 import { useTitle } from "../lib/useTitle.js";
+import { COMPANY } from "../config.js";
 
 const READY = {
   wc: "Payroll estimates by job type for the next 12 months",
@@ -32,7 +33,7 @@ export default function Confirmation() {
         <h1 className="res-title">{s.preview ? "This is where your request would be sent." : "Request received."}</h1>
         <p className="res-meta">
           {s.preview
-            ? "The preview has no backend, so nothing was sent. On the live site, this request goes straight to Keel and the customer sees this confirmation."
+            ? `The preview has no backend, so nothing was sent. On the live site, this request goes straight to ${COMPANY.name} and the customer sees this confirmation.`
             : `A licensed advisor will contact you shortly to finalize your ${s.carrier} policy, starting ${date}.`}
         </p>
         <div className="confirm-card">

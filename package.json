@@ -1,9 +1,9 @@
 {
-  "name": "keel-insurance",
+  "name": "commercial-insurance-site",
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "Keel: commercial insurance, compared.",
+  "description": "White-label commercial insurance comparison site.",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

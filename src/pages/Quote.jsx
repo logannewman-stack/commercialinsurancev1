@@ -14,7 +14,7 @@ import { estimate, hasSpace, lineEstimates } from "../lib/pricing.js";
 import { money, num, shortMoney } from "../lib/format.js";
 import { submitLead } from "../lib/leads.js";
 import { useQuote } from "../lib/store.jsx";
-import { DEMO_QUOTES } from "../config.js";
+import { COMPANY, DEMO_QUOTES } from "../config.js";
 import { useTitle } from "../lib/useTitle.js";
 import { SORTS, computeQuotes } from "../lib/pricing.js";
 
@@ -401,7 +401,7 @@ export default function Quote() {
     <div className="quote-page">
       <div className="qtop">
         <div className="wrap qtop-row">
-          <Link to="/" className="logo-link" aria-label="Keel home"><Logo /></Link>
+          <Link to="/" className="logo-link" aria-label={`${COMPANY.name} home`}><Logo /></Link>
           <ol className="sections" aria-label={`Step ${idx + 1} of ${STEPS.length}`}>
             {SECTIONS.map((s, i) => (
               <li key={s} className={i < st.section ? "done" : i === st.section ? "now" : ""}>

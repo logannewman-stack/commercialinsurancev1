@@ -1,5 +1,6 @@
 import { Phone, SearchScreen, QuestionScreen, ShoppingScreen, QuotesScreen, DoneScreen } from "./Phone.jsx";
 import { Reveal, Words } from "./fx.jsx";
+import { COMPANY } from "../config.js";
 
 const SCREENS = [SearchScreen, QuestionScreen, ShoppingScreen, QuotesScreen, DoneScreen];
 
@@ -12,7 +13,7 @@ export default function PhoneRow() {
           <Words as="h2" id="phones-title" className="mega-2" text="Works on your phone." tail="Start at your desk, finish on the job." />
         </div>
       </div>
-      <div className="phone-row" role="img" aria-label="Keel on a phone: search, questions, carriers, quotes and confirmation screens">
+      <div className="phone-row" role="img" aria-label={`${COMPANY.name} on a phone: search, questions, carriers, quotes and confirmation screens`}>
         {SCREENS.map((S, i) => (
           <Reveal key={i} className={`pr-item pr-${i}`} delay={0.08 * Math.abs(2 - i)} y={40}>
             <Phone><S active /></Phone>

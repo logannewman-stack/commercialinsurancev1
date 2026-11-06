@@ -3,6 +3,7 @@ import { LayoutGroup, motion, useReducedMotion, useScroll, useSpring, useTransfo
 import { Check } from "lucide-react";
 import { money, initials } from "../lib/format.js";
 import { useMedia } from "./fx.jsx";
+import { COMPANY } from "../config.js";
 
 const EXAMPLES = [
   { tab: "Café", biz: "Brightside Café",
@@ -54,7 +55,7 @@ export default function ProductWindow() {
       <motion.div className="pw" style={reduce ? undefined : { rotateX, scale, y }} role="img" aria-label={`Sample comparison: ${ex.quotes.length} carriers quoting ${ex.biz}, lowest ${money(min)} a month`}>
         <div className="pw-bar">
           <span className="pw-dots" aria-hidden="true"><i /><i /><i /></span>
-          <span className="pw-title">Keel · Your quotes</span>
+          <span className="pw-title">{COMPANY.name} · Your quotes</span>
           <span className="tag">Sample</span>
         </div>
         <div className="pw-body">

@@ -1,8 +1,19 @@
-# Keel
+# Commercial insurance comparison site (white-label)
 
-Commercial insurance, compared. A business owner answers eight questions, Keel shows quotes from several carriers side by side, and they request the policy they want.
+A ready-to-brand website for an insurance agency. A business owner answers eight questions (or uploads their current certificate of insurance), sees quotes from several carriers side by side, and requests the policy they want.
+
+The site ships unbranded: the header says "Your Company Name" next to a "Your logo here" placeholder. Set it up for a client in a few minutes (see below).
 
 Built with React, Vite and Framer Motion. Deploys to Vercel with no configuration.
+
+## Set it up for a company
+
+1. **Name, logo and contact details:** edit `src/brand.js`. The header, footer, page titles, legal pages, product screens and lead emails all read from it.
+   - Put the logo in `public/` (SVG or PNG, about 32 px tall in the header) and set `logo: "/logo.svg"`. If the logo already includes the company name, also set `logoHasName: true`.
+   - Set `legalName` to the agency's legal entity name. It appears in the footer and on the legal pages.
+2. **Icons and share image:** replace `public/favicon.svg`, `public/apple-touch-icon.png` (180×180) and `public/og.png` (1200×630). The current files are neutral placeholders.
+3. **Colors:** the palette is in `src/styles/base.css` under `:root` (light) and the dark-mode blocks. `--accent` is the yellow highlight, `--ink` and `--band` are the navy.
+4. **Lead delivery:** set the environment variables in "Get leads in your inbox" so leads go to the client's inbox.
 
 ## Run it locally
 
@@ -36,7 +47,7 @@ Every quote request, callback request and policy request is sent to `POST /api/l
 | --- | --- |
 | `RESEND_API_KEY` | API key from https://resend.com. Turns on lead emails. |
 | `LEAD_NOTIFY_EMAIL` | Where lead emails go. Separate several addresses with commas. |
-| `LEAD_FROM_EMAIL` | Optional sender, like `Keel Leads <leads@yourdomain.com>`. Needs your domain verified in Resend. Without it, Resend's test sender is used, which can only email the address on your Resend account. |
+| `LEAD_FROM_EMAIL` | Optional sender, like `Your Company <leads@yourdomain.com>`. Needs your domain verified in Resend. Without it, Resend's test sender is used, which can only email the address on your Resend account. |
 | `LEAD_WEBHOOK_URL` | Optional. Any URL that accepts a JSON POST: Zapier, Make, a Slack workflow, your CRM, or the Google Sheet below. |
 | `SEND_CUSTOMER_EMAILS` | Optional. Set to `true` to email customers a copy of their quotes and a confirmation when they request a policy. Needs `RESEND_API_KEY` and `LEAD_FROM_EMAIL`. Never sent while `DEMO_QUOTES` is on. |
 
@@ -77,7 +88,7 @@ Checks the pricing engine, ZIP-to-state lookup, business search and coverage rec
 
 ## Before you launch
 
-- **Company details:** fill in `src/config.js` (support email, phone, license line, domain). Empty values stay hidden.
+- **Company details:** fill in `src/brand.js` (name, logo, support email, phone, license line, domain). Empty contact fields stay hidden.
 - **Real quotes:** the carriers in `src/data/carriers.js` are fictional, and `src/lib/pricing.js` calculates sample prices. Replace `computeQuotes()` with calls to carrier APIs or a commercial comparative rater, keeping the same return shape, then set `DEMO_QUOTES = false` in `src/config.js` to remove the "sample estimates" labels.
 - **Licensing:** you need a property and casualty agency license in each state you sell in, plus carrier appointments, before binding policies.
 - **Share image:** once you have a domain, change `og:image` in `index.html` to the full URL, such as `https://yourdomain.com/og.png`.
@@ -87,7 +98,9 @@ Checks the pricing engine, ZIP-to-state lookup, business search and coverage rec
 
 ```
 api/lead.js                 Vercel function that receives leads
-src/config.js               Company details and the demo-quotes switch
+api/documents.js            Vercel function that reads uploaded insurance documents
+src/brand.js                Company name, logo and contact details
+src/config.js               The demo-quotes switch
 src/data/                   Business types, coverage, carriers, states, form options
 src/lib/pricing.js          Sample pricing engine (swap for real carrier quotes)
 src/lib/store.jsx           Saves answers in the browser so people can resume

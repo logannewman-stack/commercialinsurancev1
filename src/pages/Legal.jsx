@@ -28,7 +28,7 @@ export function Privacy() {
   useTitle("Privacy policy");
   return (
     <Doc title="Privacy policy">
-      <p>{COMPANY.legalName} (“Keel”, “we”) is an independent insurance agency. This policy explains what we collect when you use this website, why, and who we share it with.</p>
+      <p>{COMPANY.legalName} (“{COMPANY.name}”, “we”) is an independent insurance agency. This policy explains what we collect when you use this website, why, and who we share it with.</p>
       <h2>What we collect</h2>
       <ul>
         <li><b>What you tell us about your business:</b> type of business, location, building size, revenue, number of employees, business history and the coverage you want.</li>
